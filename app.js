@@ -2,6 +2,7 @@ const express = require('express');
 const db  = require('./config/mongoose');
 const expressLyauouts = require('express-ejs-layouts')
 const cookieParser = require('cookie-parser');
+const expressSession = require('express-session');
 const app = express();
 const port = 1000;
 
@@ -11,12 +12,16 @@ app.set('views', './views');
 
 app.use(expressLyauouts);
 app.use(cookieParser());
+app.use( expressSession( {secret: 'apple' } ) );
 app.use(express.static('assets'));
 app.use(express.urlencoded({extended:true}));
 app.use('/users', require('./routes/users'));
 
 
 app.get('/', (request, response ) => {
+
+    console.log(request.session);
+
     return  response.render("home", {title: "Home"});
  });
  

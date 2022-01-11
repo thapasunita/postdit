@@ -2,18 +2,18 @@ const { request, response } = require('express');
 const User = require('../model/user');
 
 module.exports.profile = (request, response) => {
-   
-   if(request.cookies.user_id == undefined) {
+    
+    console.log("In profile");
+    console.log(request.session);
+
+   if(request.session.user == undefined) {
       return response.redirect('/users/sign-in');
    }
 
-   User.findById(request.cookies.user_id, (err, user) => {
-        return response.render('user_profile', {
-            title: 'User Profile',
-            name: user.name
-        });
-   });
-
+   return response.render('user_profile', {
+    title: 'User Profile',
+    name: request.session.user.name
+});
     
 }
 
@@ -35,7 +35,11 @@ module.exports.signIn = (request, response) => {
 
 
 module.exports.logout = (request, response) => {
-    response.clearCookie('user_id');
+    console.log(request.session);
+    
+    request.session.destroy();
+    console.log('------------------');
+    console.log(request.session);
     return response.render('home');
 
 }
@@ -67,11 +71,13 @@ module.exports.create = (request, response) => {
 //sign in  and create a session for the user
 module.exports.createSession = (request, response) => {
     //Todo later
+    console.log(request.session);
 
     User.findOne({ email: request.body.email }, (err, user) => {
+       
         if (user) {
             if (request.body.password == user.password) {
-                response.cookie('user_id', user.id);
+                request.session['user'] = user;
                 return response.redirect('/users/profile');
             }
         }
