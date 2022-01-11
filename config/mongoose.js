@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect('mongodb://localhost/sign_Up_In');
+mongoose.connect('mongodb://localhost/postdit');
 
 const db = mongoose.connection;
 
