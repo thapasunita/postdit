@@ -1,0 +1,32 @@
+<div class="fluid-container">
+  <div class="content">
+    <div class="logo-box">
+      <!-- background Image here -->
+    </div>
+
+    <!-- sign in and sign up right box -->
+    <div class="sign-in-up-container">
+      <div class="sign-up-in-box">
+        <h1 class="heading">Sign Up</h1>
+ 
+        <div class="sign-up-in">
+          <form action="/users/create" method="post" autocomplete="off">
+            <input class="name" type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+            <div class="termsCondition">
+                <input type="checkbox" name="checkbox" required>
+                <span>I Agree to the <a href="#">Terms & Condition</a></span>
+            </div>
+            <button type="submit">Sign Up</button>
+
+          </form>
+        
+          <p class="goSignIn">Already have an account? <a href="sign-in">Sign In here</a></p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
